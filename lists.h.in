@@ -1,4 +1,4 @@
-/* $Id: lists.h.in,v 1.1 2005/07/24 12:18:25 luis Exp $
+/* $Id: lists.h.in,v 1.2 2005/08/18 09:18:39 luis Exp $
  * Author: Luis Colorado <lc@luiscoloradosistemas.com>
  * Date: Mon Jul 18 17:21:22 CEST 2005
  *
@@ -24,7 +24,7 @@
 #ifndef LISTS_H
 #define LISTS_H
 
-static char LISTS_H_RCSId[] = "\n$Id: lists.h.in,v 1.1 2005/07/24 12:18:25 luis Exp $\n";
+static char LISTS_H_RCSId[] = "\n$Id: lists.h.in,v 1.2 2005/08/18 09:18:39 luis Exp $\n";
 
 #define LISTS_H_PACKAGE_NAME "@PACKAGE_NAME@"
 #define LISTS_H_PACKAGE_VERSION "@PACKAGE_VERSION@"
@@ -52,6 +52,7 @@ typedef struct LNODE_S {
 #define LIST_NEXT(X) LIST_FIRST(X)
 #define LIST_PREV(X) LIST_PREV(X)
 
+#define LIST_ATEOL(p, L) ((p)==(L))
 #define LIST_FOREACH(p, L) for(p=(L)->next;p!=(L);p=p->next)
 #define LIST_FORBACK(p, L) for(p=(L)->prev;p!=(L);p=p->prev)
 
@@ -68,4 +69,4 @@ typedef struct LNODE_S {
  * protected against double inclusion from other files.
  */
 
-/* $Id: lists.h.in,v 1.1 2005/07/24 12:18:25 luis Exp $ */
+/* $Id: lists.h.in,v 1.2 2005/08/18 09:18:39 luis Exp $ */

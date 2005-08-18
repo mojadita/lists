@@ -1,4 +1,4 @@
-/* $Id: prulists.c,v 1.1 2005/07/24 12:18:25 luis Exp $
+/* $Id: prulists.c,v 1.2 2005/08/18 09:18:39 luis Exp $
  * Author: Luis Colorado <Luis.Colorado@HispaLinux.ES>
  * Date: Mon Jul 18 17:53:02 CEST 2005
  *
@@ -44,13 +44,12 @@ LIST_DECLARE(lista_nodos);
 /* prototypes */
 
 /* variables */
-static char PRULISTS_C_RCSId[]="\n$Id: prulists.c,v 1.1 2005/07/24 12:18:25 luis Exp $\n";
+static char PRULISTS_C_RCSId[]="\n$Id: prulists.c,v 1.2 2005/08/18 09:18:39 luis Exp $\n";
 
 /* functions */
 void printlist(void)
 {
 		LNODE_P p;
-		return;
 
 		printf("\n");
 		LIST_FOREACH(p, &lista_nodos) {
@@ -87,4 +86,4 @@ int main (int argc, char **argv)
 } /* main */
 
 
-/* $Id: prulists.c,v 1.1 2005/07/24 12:18:25 luis Exp $ */
+/* $Id: prulists.c,v 1.2 2005/08/18 09:18:39 luis Exp $ */
