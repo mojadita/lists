@@ -1,0 +1,17 @@
+.cvsignore
+.deps
+.git
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache
+config.log
+config.status
+configure
+depcomp
+install-sh
+lists.h
+missing
+prulists
+CVS
+prulists.o
