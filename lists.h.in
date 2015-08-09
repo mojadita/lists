@@ -40,10 +40,9 @@ typedef struct LNODE_S {
 
 /* definitions */
 #ifndef OFFSETOF
-#define OFFSETOF(X, f) ((int)&(((X *)0)->f))
+#define OFFSETOF(X, f) ((char *)&(((X *)0)->f) - (char *)0)
 #endif
 
-#define LIST_OFFSET(X, f) ((X *)0)->f
 #define LIST_INIT(X) {(X)->prev = (X)->next = (X);}
 #define LIST_DECLARE(X) LNODE_T X = { .next = &X, .prev = &X }
 
