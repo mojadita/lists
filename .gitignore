@@ -1,5 +1,6 @@
 .cvsignore
 .deps
+.depend
 .git
 Makefile
 Makefile.in
@@ -15,3 +16,5 @@ missing
 prulists
 CVS
 prulists.o
+compile
+tags
