@@ -26,16 +26,20 @@
 #include <sys/socket.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <time.h>
+#include <errno.h>
+#include <dirent.h>
 #include "lists.h"
 
 /* constants */
+#define FMT(X) __FILE__":%d:%s: " X, __LINE__, __func__
 
 /* types */
 struct nodo {
-		int num;
+		char *name;
 		LNODE_T node;
 };
 
@@ -46,43 +50,30 @@ LIST_DECLARE(lista_nodos);
 /* variables */
 static char PRULISTS_C_RCSId[]="\n$Id: prulists.c,v 1.2 2005/08/18 09:18:39 luis Exp $\n";
 
-/* functions */
-void printlist(void)
-{
-		LNODE_P p;
-
-		printf("\n");
-		LIST_FOREACH(p, &lista_nodos) {
-				struct nodo *q = LIST_ELEMENT(p, struct nodo, node);
-				printf("<%d>", q->num);
-		} /* LIST_FOREACH */
-		printf("\n");
-
-} /* printlist */
-
 /* main program */
 int main (int argc, char **argv)
 {
-	printf(LISTS_H_PACKAGE_STRING":\n");
-	for (;;) {
-			struct nodo *p = LIST_ELEMENT(LIST_FIRST(&lista_nodos), struct nodo, node);
-			struct nodo *n = malloc(sizeof (struct nodo));
+    struct nodo *p;
+    LNODE_P it;
+    int i;
 
-			if (!n) {
-					perror("malloc");
-					exit(1);
-			} /* if */
-			n->num = random();
-			LIST_APPEND(&lista_nodos, &n->node);
-
-			if (!p || p == n) continue;
-
-			if (n->num > p->num) {
-					printlist();
-					LIST_DELETE(LIST_FIRST(&lista_nodos));
-					free(p);
-			} /* if */
-	} /* for */
+    for (i = 1; i < argc; i++) {
+        struct nodo *p = malloc(sizeof (struct nodo));
+        p->name = strdup(argv[i]);
+        if (!p || !p->name) {
+            fprintf(stderr, FMT("malloc: %s(errno = %d)\n"),
+                    strerror(errno), errno);
+            exit(EXIT_FAILURE);
+        }
+        LIST_INIT(&p->node);
+        printf(FMT("añadiendo [%s]\n"), p->name);
+        //LIST_APPEND_ELEMENT(&lista_nodos, p, struct nodo, node);
+        LIST_APPEND(&lista_nodos, &p->node);
+    }
+    LIST_FOREACH(it, &lista_nodos) {
+        p = LIST_ELEMENT(it, struct nodo, node);
+        printf(FMT("RECORRIENDO [%s]\n"), p->name);
+    }
 } /* main */
 
 

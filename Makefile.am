@@ -8,4 +8,9 @@ prulists_SOURCES = prulists.c lists.h
 
 include_HEADERS = lists.h
 
+#include .depend
+
+depend:
+	mkdep *.c
+
 # $Id: Makefile.am,v 1.2 2014/09/22 16:07:07 luis Exp $
