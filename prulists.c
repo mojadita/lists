@@ -35,7 +35,7 @@
 
 /* types */
 struct nodo {
-		int num;
+		int     num;
 		LNODE_T node;
 };
 
@@ -44,45 +44,40 @@ LIST_DECLARE(lista_nodos);
 /* prototypes */
 
 /* variables */
-static char PRULISTS_C_RCSId[]="\n$Id: prulists.c,v 1.2 2005/08/18 09:18:39 luis Exp $\n";
 
-/* functions */
-void printlist(void)
-{
-		LNODE_P p;
+struct nodo *add(int num) {
+    struct nodo *n = malloc(sizeof *n);
+    n->num = num;
+    LIST_APPEND_ELEMENT(&lista_nodos, n, struct nodo, node);
+    return n;
+}
 
-		printf("\n");
-		LIST_FOREACH(p, &lista_nodos) {
-				struct nodo *q = LIST_ELEMENT(p, struct nodo, node);
-				printf("<%d>", q->num);
-		} /* LIST_FOREACH */
-		printf("\n");
+void list(){
+    struct nodo *n;
+    printf("size=%d: ", lista_nodos.l_size);
+    LIST_FOREACH_ELEMENT(n, &lista_nodos, struct nodo, node) {
+        printf("<%d>", n->num);
+    }
+    printf(";\n");
+}
 
-} /* printlist */
-
-/* main program */
 int main (int argc, char **argv)
 {
-	printf(LISTS_H_PACKAGE_STRING":\n");
-	for (;;) {
-			struct nodo *p = LIST_ELEMENT(LIST_FIRST(&lista_nodos), struct nodo, node);
-			struct nodo *n = malloc(sizeof (struct nodo));
-
-			if (!n) {
-					perror("malloc");
-					exit(1);
-			} /* if */
-			n->num = random();
-			LIST_APPEND(&lista_nodos, &n->node);
-
-			if (!p || p == n) continue;
-
-			if (n->num > p->num) {
-					printlist();
-					LIST_DELETE(LIST_FIRST(&lista_nodos));
-					free(p);
-			} /* if */
-	} /* for */
+    struct nodo *n;
+    add(1); list();
+    add(2); list();
+    add(3); list();
+    while(n = LIST_FIRST_ELEMENT(&lista_nodos, struct nodo, node)) {
+        LIST_UNLINK_ELEMENT(&lista_nodos, n, struct nodo, node);
+        list();
+    }
+    add(4); list();
+    n = add(5); list();
+    add(6); list();
+    LIST_UNLINK_ELEMENT(&lista_nodos, n, struct nodo, node); list();
+    while(n = LIST_LAST_ELEMENT(&lista_nodos, struct nodo, node)) {
+        LIST_UNLINK_ELEMENT(&lista_nodos, n, struct nodo, node); list();
+    }
 } /* main */
 
 
