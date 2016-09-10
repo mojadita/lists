@@ -54,7 +54,7 @@ typedef struct LIST_S {
         /* initialize fields of list L */
 #define LIST_INIT(L) do{\
         (L)->l_size=0;\
-        (L)->l_next=(L)->l_last=0;\
+        (L)->l_first=(L)->l_last=0;\
     }while(0)
 
 #define LIST_DECLARE(L) \
