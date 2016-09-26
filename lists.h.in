@@ -100,15 +100,15 @@ typedef struct LIST_S {
 #define __LIST_COMMON_UNLINK(L,N,lst,nxt,prv)           \
         if ((N)->nxt) (N)->nxt->prv = (N)->prv;         \
         else {                                          \
-            assert((L)->lst == (N));                    \
+            if((L)->lst != (N)) break;                  \
             (L)->lst = (N)->prv;                        \
         }
 
 #define LIST_UNLINK(L,N) do{                            \
-        assert((L)->l_size);                            \
-        (L)->l_size--;                                  \
+        if (!(L)->l_size) break;                        \
         __LIST_COMMON_UNLINK(L,N,l_last,n_next,n_prev); \
         __LIST_COMMON_UNLINK(L,N,l_first,n_prev,n_next);\
+        (L)->l_size--;                                  \
         (N)->n_next = (N)->n_prev = 0;                  \
     } while(0)
 
