@@ -2,7 +2,7 @@
 # AUTHOR: Luis Colorado <lc@luiscoloradosistemas.com>
 # DATE: dom jul 24 13:45:28 CEST 2005
 
-AC_INIT(lists, 1.0, luiscoloradourcola@gmail.com)
+AC_INIT(lists, 1.2, luiscoloradourcola@gmail.com)
 
 AM_INIT_AUTOMAKE([foreign -Wall])
 
